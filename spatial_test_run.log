@@ -1,0 +1,13 @@
+test_active_fraction_matches_marginal_order (test_spatial_percolation.PercolationChecks.test_active_fraction_matches_marginal_order) ... ok
+test_bfs_and_union_find_agree_on_seeded_masks (test_spatial_percolation.PercolationChecks.test_bfs_and_union_find_agree_on_seeded_masks) ... ok
+test_covariance_calibration (test_spatial_percolation.PercolationChecks.test_covariance_calibration) ... ok
+test_diagonal_rule_changes_connectivity (test_spatial_percolation.PercolationChecks.test_diagonal_rule_changes_connectivity) ... ok
+test_empty_and_full_limits (test_spatial_percolation.PercolationChecks.test_empty_and_full_limits) ... ok
+test_field_normalization (test_spatial_percolation.PercolationChecks.test_field_normalization) ... ok
+test_horizontal_path_and_disconnected_column (test_spatial_percolation.PercolationChecks.test_horizontal_path_and_disconnected_column) ... ok
+test_wilson_interval_contains_sample_proportion (test_spatial_percolation.PercolationChecks.test_wilson_interval_contains_sample_proportion) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.080s
+
+OK
