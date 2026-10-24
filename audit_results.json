@@ -1,0 +1,110 @@
+{
+  "python": "3.12.3",
+  "numpy": "2.5.3",
+  "tests": [
+    {
+      "test": "ensemble_control_charge_sum",
+      "passed": true,
+      "detail": {
+        "baseline_mu_over_t": 5.76536663809491e-06,
+        "perturbed_fixed_N_mu_over_t": 0.03841285003259663,
+        "fixed_N_sum_delta_n": -8.881784197001252e-16,
+        "fixed_mu_sum_delta_n": -0.13986899907171102,
+        "fixed_mu_total_filling": 0.982516375116036
+      }
+    },
+    {
+      "test": "square_lattice_dispersion_bounds",
+      "passed": true,
+      "detail": {
+        "min": -4.0,
+        "max": 3.9902562010392972,
+        "mesh": 45
+      }
+    },
+    {
+      "test": "fermi_numerical_stability",
+      "passed": true,
+      "detail": {
+        "temperatures_over_t": [
+          0.04,
+          1e-09
+        ],
+        "bounds": [
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "test": "hamiltonian_hermiticity",
+      "passed": true,
+      "detail": {
+        "max_abs_H_minus_Hdagger": 0.0
+      }
+    },
+    {
+      "test": "fixed_total_filling",
+      "passed": true,
+      "detail": {
+        "0.7": {
+          "mean_filling": 0.7,
+          "mean_error": 0.0,
+          "mu": -0.7380314707049869,
+          "min_layer_occupation": 0.6977181237548392,
+          "max_layer_occupation": 0.7014003481870109
+        },
+        "1.0": {
+          "mean_filling": 1.0,
+          "mean_error": 0.0,
+          "mu": 5.76536663809491e-06,
+          "min_layer_occupation": 0.9999476240491372,
+          "max_layer_occupation": 1.0000335776674072
+        },
+        "1.3": {
+          "mean_filling": 1.3,
+          "mean_error": 0.0,
+          "mu": 0.7380460317260535,
+          "min_layer_occupation": 1.2988630056511543,
+          "max_layer_occupation": 1.3022789042987257
+        }
+      }
+    },
+    {
+      "test": "representative_k_grid",
+      "passed": true,
+      "detail": [
+        {
+          "mesh": 25,
+          "interface_delta_n": -0.1309429663888233,
+          "profile_rms_delta_n": 0.04954793730800267
+        },
+        {
+          "mesh": 35,
+          "interface_delta_n": -0.12376617484088026,
+          "profile_rms_delta_n": 0.0468710614957131
+        },
+        {
+          "mesh": 45,
+          "interface_delta_n": -0.1260660811198876,
+          "profile_rms_delta_n": 0.047689662007954006
+        },
+        {
+          "mesh": 55,
+          "interface_delta_n": -0.12642877867281177,
+          "profile_rms_delta_n": 0.04782148175367281
+        },
+        {
+          "mesh": 65,
+          "interface_delta_n": -0.12560948574861508,
+          "profile_rms_delta_n": 0.047520358647894625
+        },
+        {
+          "mesh": 75,
+          "interface_delta_n": -0.12581743964543168,
+          "profile_rms_delta_n": 0.04759853053327831
+        }
+      ]
+    }
+  ]
+}
