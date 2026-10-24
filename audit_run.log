@@ -1,0 +1,12 @@
+test_charge_conservation_is_due_to_fixed_density_solver (__main__.NotebookAudit.test_charge_conservation_is_due_to_fixed_density_solver) ... ok
+test_dispersion_limits_and_finiteness (__main__.NotebookAudit.test_dispersion_limits_and_finiteness) ... ok
+test_finite_stable_fermi_occupations (__main__.NotebookAudit.test_finite_stable_fermi_occupations) ... ok
+test_hamiltonian_hermiticity (__main__.NotebookAudit.test_hamiltonian_hermiticity) ... ok
+test_particle_number_and_density_bounds (__main__.NotebookAudit.test_particle_number_and_density_bounds) ... ok
+test_representative_k_grid_convergence (__main__.NotebookAudit.test_representative_k_grid_convergence) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.875s
+
+OK
+Wrote /home/ubuntu/nickelate_research_audit/audit_results.json
