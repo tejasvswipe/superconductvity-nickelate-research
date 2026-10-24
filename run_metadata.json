@@ -1,0 +1,42 @@
+{
+  "generated_utc_date": "2026-10-24",
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2",
+    "pandas": "3.0.6",
+    "operating_environment": "Manus sandbox Ubuntu Linux"
+  },
+  "tight_binding_notebook": {
+    "baseline_execution": "completed; computational cell executed in original_reproduction",
+    "recorded_representative_interface_delta_n": -0.1260660811198876,
+    "recorded_profile_rms_delta_n": 0.047689662007954006,
+    "recorded_layer_sum_delta_n": -8.881784197001252e-16,
+    "audit_test_count": 6,
+    "audit_passed": 6,
+    "test_results_file": "audit_results.json",
+    "limits": "One representative k-grid sequence only; not a full parameter-wide convergence study. No self-consistent electrostatics or material-fitted parameters."
+  },
+  "new_spatial_sensitivity": {
+    "status": "executed exploratory model sensitivity, not reproduction of supplied original percolation simulation",
+    "configuration_file": "spatial_config.json",
+    "base_seed": 53821,
+    "conditions": 8,
+    "independent_maps": 2400,
+    "aggregate_csv": "spatial_covariance_sensitivity.csv",
+    "map_level_csv": "spatial_covariance_sensitivity_replicates.csv",
+    "figure": "spatial_covariance_sensitivity.png",
+    "automated_test_count": 8,
+    "automated_tests_passed": 8,
+    "test_file": "test_spatial_percolation.py",
+    "limits": "N=64 only; two spectral covariance families matched by nearest-neighbour correlation only; no material proxy calibration; no original field generator or raw maps supplied."
+  },
+  "user_supplied_percolation_calculation": {
+    "status": "not independently reproduced",
+    "reason": "Original source, exact covariance/filter specification, and per-realization outputs were absent from supplied files."
+  },
+  "linked_google_doc": {
+    "status": "not accessed",
+    "reason": "No readable Google Docs authorization or exported document contents in the session. No modification attempted."
+  }
+}
