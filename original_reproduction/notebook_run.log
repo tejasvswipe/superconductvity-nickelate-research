@@ -1,0 +1,23 @@
+COMPUTATIONAL MODEL TEST — NOT A LAB EXPERIMENT
+Model: one-orbital, non-interacting layered square-lattice tight binding; fixed total filling.
+Energies/hoppings dimensionless; no fitted nickelate parameters; no pairing, Tc, resistance, or magnetism.
+K mesh 45x45; t_perp/t=0.2; T/t=0.04; fillings=(0.7, 1.0, 1.3); thicknesses=(4, 6, 8, 12)
+
+Representative N=8, filling=1 case:
+reference: Δn_interface=+0.00000; profile RMS=0.00000; sum Δn=+0.00e+00; xi-fit=nan (R²=nan)
+interface_plus: Δn_interface=-0.12607; profile RMS=0.04769; sum Δn=-8.88e-16; xi-fit=68 (R²=0.07)
+interface_minus: Δn_interface=+0.12584; profile RMS=0.04761; sum Δn=+4.44e-16; xi-fit=64.5 (R²=0.07)
+interface_barrier: Δn_interface=-0.00001; profile RMS=0.00002; sum Δn=+4.44e-16; xi-fit=inf (R²=0.25)
+two_layer_potential_proxy: Δn_interface=-0.05453; profile RMS=0.03029; sum Δn=+4.44e-16; xi-fit=8.86 (R²=0.36)
+uniform_hopping_plus5pct: Δn_interface=+0.00000; profile RMS=0.00001; sum Δn=+0.00e+00; xi-fit=nan (R²=nan)
+interface_plus_under_uniform_hopping_plus5pct: Δn_interface=-0.12047; profile RMS=0.04558; sum Δn=-4.44e-16; xi-fit=65.3 (R²=0.07)
+
+K-grid convergence:
+25x25: Δn_interface=-0.130943; profile RMS=0.049548
+35x35: Δn_interface=-0.123766; profile RMS=0.046871
+45x45: Δn_interface=-0.126066; profile RMS=0.047690
+55x55: Δn_interface=-0.126429; profile RMS=0.047821
+65x65: Δn_interface=-0.125609; profile RMS=0.047520
+75x75: Δn_interface=-0.125817; profile RMS=0.047599
+
+Files: layer_charge_profiles.csv, model_summary.csv, k_grid_convergence.csv, charge_reconstruction_profiles.png
