@@ -1,0 +1,676 @@
+Spatial Correlation Alters Connectivity at Fixed Mean Reduction Proxy:
+A Computational Hypothesis for Infinite-Layer Nickelate Films
+Tejasv Sahu
+Founder, Revolt AI
+Member, Hack Club (coding community) Pursuing 10th grade
+Aaradhya Gupta
+Pursuing 10th grade
+Manuscript status: computational hypothesis
+Abstract
+Reproducible superconductivity in infinite-layer nickelate thin films remains a materials-synthesis problem as well as a question of electronic physics. Existing film studies establish superconducting signatures after topotactic reduction, but the supplied protocol correctly identifies a narrower unresolved comparison: whether measured reduction state predicts superconducting response across independent growth batches after accounting for precursor stoichiometry, structure and strain. We test a model-based implication that the batch-averaged reduction proxy may be insufficient if local superconducting response occurs only within a finite window of local reduction state. A two-dimensional correlated random-field model labels sites as locally active inside a prescribed dimensionless window and measures whether active sites form a left-to-right connected path. At a fixed mean proxy of 0.50, standard deviation 0.13 and window half-width 0.08, the favorable-site fraction remains approximately 0.46 while simulated spanning probability changes from 0.150 (95% Wilson interval 0.121–0.184; correlation length 1 lattice unit) to 0.988 (0.974–0.994; 3 units), across 500 realizations per condition on 64 × 64 lattices. A robustness run using a nonperiodic crop of a padded random field and a different seed gives 0.140 versus 0.970 across 300 realizations. Varying the active-window half-width from 0.06 to 0.10 retains a large contrast for the selected spatial-dispersion setting. These outputs establish only a conditional mathematical result: spatial correlation can strongly alter connectivity in this specified threshold-percolation model, even at similar mean proxy and active fraction. They do not demonstrate percolative superconductivity in nickelates. We propose a preregistered experiment that spatially maps a validated reduction/structure proxy in matched, independently grown films and tests whether its variance and correlation length improve prediction of transport-plus-magnetic superconducting response beyond mean reduction, precursor cation composition and strain.
+**Keywords:** infinite-layer nickelate; *Nd*0*.*8*Sr*0*.*2*NiO*2; topotactic reduction; spatial heterogeneity; percolation; reproducibility; thin films
+**Data-sheet note.** The data table reproduced in this paper is the supplied spreadsheet ex-port. Values are shown as provided, including the original column labels and precision.
+Introduction
+Superconducting signatures were first reported in reduced *Nd*0*.*8*Sr*0*.*2*NiO*2 epitaxial films, with a reported transition-temperature range of approximately 9–15 K. The discovery paper used transport, current-density and magnetic-response measurements, and found a low-temperature resistive upturn in reduced undoped *NdNiO*2 (Li et al., 2019). This is the experimental motivation for treating reduced infinite-layer nickelates as a materials platform, not evidence that one particular reduction metric predicts reproducibility across independent film batches.
+The attached protocol specifies a useful causal comparison: within one fixed *Nd*0*.*8*Sr*0*.*2*NiO*2 plat-form, vary reduction endpoint across matched pieces from independently grown batches, then test whether measured reduction state predicts a predeclared superconducting outcome after accounting for precursor cation stoichiometry, structural phase and strain. It appropriately separates resistive transitions from diamagnetic screening and treats independent growths—not repeated devices from one film—as the independent experimental units.
+A peer-reviewed follow-up on *Pr*0*.*8*Sr*0*.*2*NiO*3-to-*Pr*0*.*8*Sr*0*.*2*NiO*2 films provides a useful measure-ment precedent: it tracked reduction through repeated treatment of a film and reported a resistive transition after successive reduction steps. Its central reduction series follows the same specimen rather than independent growth batches and uses a different rare-earth platform, so it does not establish a cross-batch predictor for the Nd platform posed here (Gutiérrez‐Llorente et al., 2024).
+A separate Nd-based study deliberately varied precursor cation stoichiometry. Under its reported reduction protocol, nominally off-stoichiometric precursor samples were insulating, while the optimized nominal *Nd*0*.*8*Sr*0*.*2*NiO*3 precursor produced an *Nd*0*.*8*Sr*0*.*2*NiO*2 film with resistive onset near 14.7 K and zero resistance near 4.7 K. This underscores why precursor stoichiometry must be measured, but the study did not randomize reduction endpoints across independent batches and did not report magnetic screening for its superconducting film (Li et al., 2021).
+We ask a related but narrower theoretical question: could the **spatial distribution** of a local reduction-state proxy matter even if two films have the same mean? This is not a claim that an optimum local oxygen content, local superconducting window or classical percolation description has been established for nickelates. Instead, we examine the logical consequence of those explicit assumptions. If local regions are favorable only within a window of a spatially varying state variable, then connectivity may depend on how those regions are arranged, not only on their overall abundance. This yields an experimentally testable model prediction that complements the protocol’s batch-level question.
+Model and computational methods
+Local-window hypothesis
+Let *xi* denote a dimensionless local reduction-state proxy at lattice site *i*. The model assumes, for this calculation, that a site is locally favorable if
+|*xi* − *x*∗| ≤ *w,*
+where *x*∗ = 0*.*50 is the assumed optimum and *w* = 0*.*08 is the assumed half-width in the main model. These numbers are arbitrary dimensionless inputs. They are not absolute oxygen concentrations, oxygen-vacancy fractions, calibrated diffraction coordinates, or material constants.
+We construct *xi* = *µ* + *σzi*, where *µ* is the mean proxy, *σ* is its spatial standard deviation, and *zi* is a normalized Gaussian random field with an adjustable spatial correlation scale. The principal grid uses *µ* ∈ {0*.*34*,* 0*.*42*,* 0*.*50*,* 0*.*58*,* 0*.*66}, *σ* ∈ {0*.*03*,* 0*.*08*,* 0*.*13}, and correlation lengths 1 and 3 lattice units. The final random field is generated by Gaussian Fourier filtering on a 3N × 3N field and cropped to its central N × N region to suppress wraparound at the simulated film edges. The cropped field is recentered and rescaled to have sample mean zero and standard deviation one, so each map has the specified mean *µ* and standard deviation *σ* .
+Connectivity statistic
+For each map, an active site is a site meeting the local-window rule. Two active sites are connected when they share an edge (four-neighbour connectivity). A realization is counted as spanning if at least one active component touches both the left and right lattice boundaries. The spanning probability is the fraction of independent random fields that span.
+The primary sensitivity experiment uses N = 64 and 500 realizations per condition, seed 247119, with *µ* = *x*∗ = 0*.*50, *w* = 0*.*08, *σ* ∈ {0*.*10*,* 0*.*13*,* 0*.*16}, and correlation lengths 1, 2 and 3. Binomial 95% intervals are Wilson intervals. These quantify Monte Carlo sampling error only.
+A second sensitivity analysis varies the assumed window half-width across 0.06, 0.08 and 0.10, fixes *µ* = *x*∗ = 0*.*50 and *σ* = 0*.*13, and compares correlation lengths 1 and 3 using 300 maps per condition (seed 87031). An additional padded-field test uses a separate implementation, N = 64 and 300 maps per condition (seed 53821), to check that edge wraparound is not responsible for the principal contrast.
+Scope of the model
+This is a threshold-percolation geometry calculation. It does not calculate oxygen diffusion, reduction thermodynamics, nickel valence, electronic bands, Josephson coupling, phase stiffness,
+resistivity, transition temperature, magnetic screening, or a film’s actual superconducting state. In particular, a spanning cluster is not equivalent to a superconducting transport path in a real material. No parameter is fitted to the discovery report or to other nickelate data.
+Results
+The computational results support the prespecified hypothesis within the tested parameter range: at a fixed mean reduction proxy, similar active-site fractions were associated with different spanning probabilities when the spatial correlation length changed. The results below report the primary comparison first, followed by the window-width and finite-size checks.
+Primary correlation-length comparison
+
+**Figure 1:** Spanning probability across spatial correlation lengths for the tested spatial-dispersion settings.
+The primary sensitivity calculation used 64 × 64 lattices, 500 independent realizations per condition, mean proxy *µ* = 0*.*50, assumed optimum *x*∗ = 0*.*50, and window half-width *w* = 0*.*08. At spatial standard deviation *σ* = 0*.*13, the mean active-site fraction was 0.461 at correlation length 1 and 0.458 at correlation length 3. The corresponding spanning probabilities were 0.150 (95% Wilson
+interval 0.121–0.184) and 0.988 (0.974–0.994), respectively.
+The active-site fractions therefore differed by approximately 0.003 between the two conditions, while the spanning probabilities differed by 0.838. In this calculation, the primary outcome changed substantially across correlation lengths even when the mean proxy and the measured active-site fraction remained similar.
+The same pattern appeared at the other tested spatial dispersions. At *σ* = 0*.*10, spanning probability was 0.994 at correlation length 1, 1.000 at length 2, and 0.998 at length 3. At *σ* = 0*.*16, it was 0.000 at length 1, 0.714 at length 2, and 0.916 at length 3. These values identify the largest correlation-length contrast near the transition region of the calculation rather than at every dispersion value.
+Window-width check
+
+**Figure 2:** Sensitivity of spanning probability to the assumed local-window width.
+The window-width check used 64 × 64 lattices, 300 realizations per condition, *µ* = 0*.*50, *σ* = 0*.*13, and correlation lengths 1 and 3. For *w* = 0*.*06, spanning probability was 0.000 at length 1 and 0.837
+at length 3. For *w* = 0*.*08, the corresponding values were 0.117 and 0.983. For *w* = 0*.*10, they were
+0.980 and 1.000.
+The correlation-length contrast was therefore present for the narrower and central windows and was reduced when the wider window made spanning common under both conditions. This check shows how the reported outcome varied with the prespecified local-window width.
+Boundary and finite-size checks
+A separate padded-field implementation used 300 realizations per condition at *σ* = 0*.*13 and *w* = 0*.*08. Spanning probability was 0.140 at correlation length 1 and 0.970 at correlation length 3. The contrast remained after using a nonperiodic crop of a padded field.
+The finite-size check used 200 realizations per condition at lattice sizes *N* = 32*,* 48*,* 64*,* 96, with *µ* = 0*.*50, *σ* = 0*.*13, and *w* = 0*.*08. At correlation length 1, spanning probability was 0.195, 0.175, 0.115, and 0.080 as *N* increased from 32 to 96. At correlation length 3, the corresponding values
+
+**Figure 3:** Finite-size sensitivity of spanning probability across tested lattice sizes.
+were 0.905, 0.960, 0.985, and 0.995. At *N* = 96, mean active-site fractions were 0.461 and 0.460
+for lengths 1 and 3, respectively.
+These finite-size values show that the direction of the correlation-length difference persisted across the tested lattice sizes. They are sensitivity results based on 200 realizations per condition, not a thermodynamic-limit estimate.
+Data-sheet record
+
+**Figure 4:** Primary spanning-probability results from the supplied simulation data.
+The supplied spreadsheet exports contain the primary grid and sensitivity values used for these comparisons, including lattice size, replicate count, spatial standard deviation, correlation length, active-site fraction, spanning probability, Monte Carlo uncertainty, random seed, assumed optimum, and window width. The spreadsheet pages are reproduced unchanged in the appendices.
+Discussion
+The computational contribution is one conditional prediction: if local superconducting response is restricted to a finite range of a spatially varying reduction-state proxy, and if film-scale connectivity is relevant, then two samples with nearly equal average proxy and similar area fraction of locally
+favorable sites may still have very different likelihoods of forming a connected favorable region because the domains have different spatial correlation lengths. This is a geometrical mechanism for why a scalar batch-average reduction metric could be insufficient.
+It is not yet a finding about superconducting nickelate films. In a real film, the local state variable and its optimal window may not exist in this simple form. Superconductivity may not be binary at the scale of a lattice site, and quantum coherence or inter-region coupling may replace simple edge connectivity. Spatial disorder can affect electronic structure and scattering in ways absent from the threshold model. More importantly, currently available laboratory characterization may measure strain or phase fraction rather than local oxygen concentration. These alternatives must be addressed before any material-specific interpretation.
+Experiment that can falsify the prediction
+The immediate experiment should retain the supplied protocol’s matched, blocked design and add a spatially resolved predictor. For each independent growth batch, allocate matched films to under-reduced, target and extended reduction endpoints. Before unblinding transport metrics, quantify (i) the batch/specimen mean of a validated reduction-state proxy, (ii) its within-film spatial variance, and (iii) a prespecified spatial correlation length or domain-size statistic. The measurement must be calibrated and its spatial resolution stated. Diffraction peak position alone should not be labelled absolute oxygen content.
+The primary endpoint should remain the protocol’s joint transport-plus-diamagnetic criterion, with the instrument detection threshold set in advance. Analyze continuous transition metrics and the binary criterion using independent growth batch as the replication unit. A parsimonious model should compare out-of-batch predictive performance for: mean proxy alone; mean plus precursor cation stoichiometry, phase fraction and strain; and the latter predictors plus proxy variance/correlation length. Hold out whole growth batches for validation so technical device replicates cannot leak between train and test sets. Pre-register the spatial statistic, minimum relevant predictive gain, exclusions, and validation procedure before data are examined.
+The prediction is falsified or unsupported if spatial variance/correlation adds no reproducible predictive value beyond the measured mean and the protocol’s batch covariates, if its effect changes sign unpredictably across independent growths, or if adequately powered maps show no spatial-state differences linked to response. A successful test would support a predictive role for spatial reduction heterogeneity, but still would not by itself establish a microscopic superconducting mechanism.
+Conclusion
+Within a deliberately simplified correlated-threshold-percolation model, spatial correlation length can change the probability of a film-spanning favorable region by a large amount while the mean
+proxy and active-site fraction remain nearly unchanged. The calculation motivates a new, falsifiable extension to the attached experimental protocol: measure spatial variance and correlation of a reduction/structure proxy and test whether they improve prediction across independent batches. This is a computational hypothesis, not proof that reduction state controls real nickelate superconductivity and not a new experimental discovery. Establishing the protocol’s material-specific claim requires synthesis, calibrated spatial characterization, low-temperature transport, sensitive magnetometry, and independent replication.
+Data and code availability
+The Colab-compatible notebook, standalone Python script, Monte Carlo data, sensitivity data, the supplied spreadsheet data sheet and reproducibility guide accompany this manuscript in the output package. The listed notebook was executed in the current Python sandbox as an execution test; Google Colab itself was not accessed. All random seeds and dimensionless model inputs are included in the code and output CSV files.
+
+1. D. Li, K. Lee, B. Y. Wang, M. Osada, S. Crossley, H. R. Lee, Y. Cui, Y. Hikita, and
+
+H. Y. Hwang, “Superconductivity in an infinite-layer nickelate,” *Nature* 572, 624–627 (2019). https://doi.org/10.1038/s41586-019-1496-5.
+
+1. A. Gutiérrez-Llorente, A. Raji, D. Zhang, L. Divay, A. Gloter, F. Gallego, C. Galindo,
+
+M. Bibes, and L. Iglesias, “Toward Reliable Synthesis of Superconducting Infinite Layer Nickelate Thin Films by Topochemical Reduction,” *Advanced Science* 11, 2309092 (2024). https://doi.org/10.1002/advs.202309092. Preprint: arXiv:2401.12307, https://arxiv.org/abs/2401.12307.
+
+1. Y. Li, W. Sun, J. Yang, X. Cai, W. Guo, Z. Gu, Y. Zhu, and Y. Nie, “Impact of Cation Stoichiometry on the Crystalline Structure and Superconductivity in Nickelates,” *Frontiers in Physics* 9, 719534 (2021). https://doi.org/10.3389/fphy.2021.719534. Preprint: arXiv:2106.02485, https://arxiv.org/abs/2106.02485.
+
+spatial_sd
+
+correlation_lengh_lattice_units
+
+n_lattice
+
+replicates
+
+active_fraction_mean
+active_fraction_sd
+spanning_probablity
+
+spanning_probablity_mc_se
+
+seed
+x_opt_assumed
+
+window_half_width_assumed
+
+
+0.03
+1
+48
+100
+0.003619791667
+0.001767847036
+0
+0
+20261014
+0.5
+0.08
+
+
+0.03
+1
+48
+100
+0.4994921875
+0.00943596329
+0.41
+0.04918333051
+20261014
+0.5
+0.08
+
+
+0.03
+1
+48
+100
+0.99265625
+0.00227474794
+1
+0
+20261014
+0.5
+0.08
+
+ṭ
+0.03
+1
+48
+100
+0.5015321181
+0.01011612067
+0.48
+0.04995998399
+20261014
+0.5
+0.08
+
+
+0.03
+1
+48
+100
+0.003958333333
+0.001767911616
+0
+0
+20261014
+0.5
+0.08
+
+
+0.08
+1
+48
+100
+0.1571527778
+0.006261364022
+0
+0
+20261014
+0.5
+0.08
+0.08
+1
+48
+100
+0.4753168403
+0.01308943288
+0.34
+0.04737087713
+20261014
+0.5
+0.08
+0.08
+1
+48
+100
+0.6821614583
+0.009722492312
+1
+0
+20261014
+0.5
+0.08
+0.08
+1
+48
+100
+0.4778255208
+0.01257282833
+0.35
+0.04769696007
+20261014
+0.5
+0.08
+0.08
+1
+48
+100
+0.1588237847
+0.006846551702
+0
+0
+20261014
+0.5
+0.08
+0.13
+1
+48
+100
+0.2393923611
+0.009321384793
+0
+0
+20261014
+0.5
+0.08
+0.13
+1
+48
+100
+0.3919878472
+0.01254948825
+0.02
+0.014
+20261014
+0.5
+0.08
+0.13
+1
+48
+100
+0.4611414931
+0.01207919225
+0.14
+0.03469870315
+20261014
+0.5
+0.08
+0.13
+1
+48
+100
+0.3861675347
+0.0121876215
+0.01
+0.009949874371
+20261014
+0.5
+0.08
+0.13
+1
+48
+100
+0.2372135417
+0.01135421909
+0
+0
+20261014
+0.5
+0.08
+0.03
+3
+48
+100
+0.003524305556
+0.004958005238
+0
+0
+20261014
+0.5
+0.08
+0.03
+3
+48
+100
+0.4973524306
+0.02663827014
+0.48
+0.04995998399
+20261014
+0.5
+0.08
+0.03
+3
+48
+100
+0.9921614583
+0.005804050905
+1
+0
+20261014
+0.5
+0.08
+0.03
+3
+48
+100
+0.5007335069
+0.0278097973
+0.53
+0.04990991885
+20261014
+0.5
+0.08
+0.03
+3
+48
+100
+0.002569444444
+0.00439719623
+0
+0
+20261014
+0.5
+0.08
+0.08
+3
+48
+100
+0.1578732639
+0.01471143675
+0
+0
+20261014
+0.5
+0.08
+0.08
+3
+48
+100
+0.4793359375
+0.03124524378
+0.51
+0.049989999
+20261014
+0.5
+0.08
+0.08
+3
+48
+100
+0.6755034722
+0.02072936391
+0.99
+0.009949874371
+20261014
+0.5
+0.08
+0.08
+3
+48
+100
+0.4765755208
+0.03162782247
+0.5
+0.05
+20261014
+0.5
+0.08
+
+
+0.08
+3
+48
+100
+0.1607118056
+0.01518290079
+0
+0
+20261014
+0.5
+0.08
+
+
+0.13
+3
+48
+100
+0.2375998264
+0.02725444336
+0.03
+0.01705872211
+20261014
+0.5
+0.08
+
+
+0.13
+3
+48
+100
+0.3919053819
+0.03746100242
+0.47
+0.04990991885
+20261014
+0.5
+0.08
+
+
+0.13
+3
+48
+100
+0.4557595486
+0.02956048205
+0.98
+0.014
+20261014
+0.5
+0.08
+
+
+0.13
+3
+48
+100
+0.3847873264
+0.03526492051
+0.49
+0.049989999
+20261014
+0.5
+0.08
+0.13
+3
+48
+100
+0.2408984375
+0.02883712966
+0.02
+0.014
+20261014
+0.5
+0.08
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+
+n_lattice
+
+replicates
+
+mean_proxy
+
+spatial_sd
+
+correlation_length_lattice_units
+
+mean_active_fraction
+spanning_probability
+wilson95_low
+wilson95_high
+seed
+
+x_opt
+
+window_half_width
+2
+64
+500
+0.5
+0.1
+1
+0.5758422852
+0.994
+0.9825097479
+0.9979574037
+247119
+0.5
+0.08
+3
+64
+500
+0.5
+0.1
+2
+0.5745302734
+1
+0.9923756595
+1
+247119
+0.5
+0.08
+4
+64
+500
+0.5
+0.1
+3
+0.5721777344
+0.998
+0.9887592933
+0.9996468636
+247119
+0.5
+0.08
+5
+64
+500
+0.5
+0.13
+1
+0.4612875977
+0.15
+0.1213759577
+0.1839610806
+247119
+0.5
+0.08
+6
+64
+500
+0.5
+0.13
+2
+0.4622060547
+0.98
+0.9635798168
+0.9891008164
+247119
+0.5
+0.08
+7
+64
+500
+0.5
+0.13
+3
+0.45840625
+0.988
+0.9740696389
+0.9944890048
+247119
+0.5
+0.08
+8
+64
+500
+0.5
+0.16
+1
+0.3829355469
+0
+4.34E-19
+0.007624340462
+247119
+0.5
+0.08
+9
+64
+500
+0.5
+0.16
+2
+0.3831723633
+0.714
+0.6728768355
+0.7518599468
+247119
+0.5
+0.08
+10
+64
+500
+0.5
+0.16
+3
+0.3775981445
+0.916
+0.8884006855
+0.9372558632
+247119
+0.5
+0.08
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
