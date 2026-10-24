@@ -1,0 +1,22 @@
+{
+  "model": "correlated Gaussian scalar field threshold-percolation; exploratory sensitivity, not original manuscript reproduction",
+  "N": 64,
+  "padding_factor": 3,
+  "replicates_per_condition": 300,
+  "target_nearest_neighbor_correlations": [0.0, 0.35, 0.6, 0.8],
+  "covariance_families": ["gaussian_spectrum", "lorentzian_spectrum"],
+  "mean_proxy": 0.5,
+  "optimum_proxy": 0.5,
+  "spatial_standard_deviation": 0.13,
+  "active_window_half_width": 0.08,
+  "base_seed": 53821,
+  "seed_method": "numpy.random.SeedSequence(base_seed).spawn(8); each child generates one uint32 seed",
+  "boundary": "periodic 3N x 3N spectral field, central N x N crop, recenter and population-standardize each crop",
+  "connectivity": ["four-neighbour edge-sharing", "eight-neighbour including diagonals"],
+  "confidence_intervals": "Wilson 95% binomial intervals conditional on independent simulated maps",
+  "software_at_run": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  }
+}
