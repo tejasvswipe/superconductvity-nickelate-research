@@ -51,7 +51,7 @@ Diagonal contact changed the zero-correlation result on the very same masks. It 
 
 **Fig. 1.** Left-to-right crossing probability on 64 × 64 maps. Bars give Wilson 95% intervals for 300 independent fields per point.
 
-**Earlier aggregate comparison.** A separate 64 × 64 study reported mean active fractions of 0.4613, 0.4622, and 0.4584 at correlation lengths of 1, 2, and 3 lattice units. Its reported crossing probabilities were 0.150, 0.980, and 0.988. These aggregate observations show the same broad direction, but a length in lattice units and a nearest-neighbor correlation specify different properties. Pooling the studies would require an explicit mapping between generators. The earlier 48 × 48 scan also omitted the mean-proxy column from its table header. **[DATA NEEDED]** The original generator, realization-level records, and verified row-to-mean mapping are required to reproduce and interpret that scan.
+**Earlier aggregate comparison.** A separate 64 × 64 study reported mean active fractions of 0.4613, 0.4622, and 0.4584 at correlation lengths of 1, 2, and 3 lattice units. Its reported crossing probabilities were 0.150, 0.980, and 0.988. These aggregate observations show the same broad direction, but a length in lattice units and a nearest-neighbor correlation specify different properties. Pooling the studies would require an explicit mapping between generators. For the earlier 48 × 48 scan, the archived table omits the mean proxy for each row, and the original generator and individual map records were unavailable. The aggregate results therefore leave open how crossing probability varied with the mean proxy at a given correlation length.
 
 **Table II. Finite-size control at target correlation 0.80.** Counts are out of 1,200 original–shuffle pairs per row. Intervals refer to original edge-sharing crossings.
 
@@ -84,7 +84,7 @@ The two size doublings provide a direct test of finite-grid stability at the mos
 
 Before evaluation, use a separate pilot to freeze the transport noise floor, magnetic background threshold, and temperature tolerance for a joint transition. Fit a baseline predictor using mean proxy, precursor composition, phase fraction and strain. Add the two spatial statistics to an otherwise identical predictor. Hold whole batches out, with all tuning confined to training batches. Report the decrease in mean squared probability error (Brier score), weighting each batch equally. Compare a batch-bootstrap interval with a pilot-defined minimum useful improvement. A lower bound above that minimum supports useful predictive gain. An upper bound below it counts against that prediction. Overlap leaves the test inconclusive.
 
-**[DATA NEEDED]** Execution requires linked film-level records, enough independent growth batches to estimate uncertainty, and a locked evaluation set. The simulations provide no held-out film score or estimate of superconducting current.
+The film records available for this study lacked a common identifier linking each calibrated reduction map to a resistance curve, a diamagnetic screening measurement, and an independent growth batch. We therefore could not estimate whether adding spatial reduction statistics improves prediction for films from a new batch. Whether connected regions in a reduction map carry superconducting current also remains open and would require a spatially registered measurement of current flow.
 
 ## V. Conclusion
 
