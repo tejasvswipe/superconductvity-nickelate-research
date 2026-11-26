@@ -1,8 +1,16 @@
 # Spatial Correlation and Connectivity Rules Govern Spanning in a Thresholded Random Field
 
-Tejasv Sahu and Aaradhaya Gupta  
-Independent student researchers, India  
-ORCID: 0009-0008-4301-3633 (T. Sahu) and 0009-0001-1160-6687 (A. Gupta)
+## About the authors
+
+Tejasv Sahu and Aaradhaya Gupta are independent student researchers in India. Their paper asks a question about the geometry of thin films: if two maps have the same number of favorable sites, how much does their arrangement matter? To study that question, the authors compare simulated maps with shuffled copies and count how often neighboring sites form a path across the grid.
+
+### Tejasv Sahu
+
+[ORCID 0009-0008-4301-3633](https://orcid.org/0009-0008-4301-3633)
+
+### Aaradhaya Gupta
+
+[ORCID 0009-0001-1160-6687](https://orcid.org/0009-0001-1160-6687)
 
 ## Abstract
 
