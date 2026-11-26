@@ -6,7 +6,7 @@ ORCID: 0009-0008-4301-3633 (T. Sahu) and 0009-0001-1160-6687 (A. Gupta)
 
 ## Abstract
 
-Can two fields with the same mean and similar fractions of favorable sites differ in their probability of containing a connected path? We studied this question on 64 × 64 lattices using two random-field spectra, four target nearest-neighbor correlations, and 300 independent realizations per condition. We classified sites through a symmetric window around a fixed proxy value and tested each resulting map for a left-to-right crossing. Mean active fractions ranged from 0.46035 to 0.46181 across conditions. With edge-sharing connectivity, neither spectral family produced a crossing at zero correlation. At a target correlation of 0.80, 61 of 300 Gaussian-spectrum maps crossed (20.3%, 95% Wilson interval 16.2–25.2%), as did 45 of 300 Lorentzian-squared-spectrum maps (15.0%, 11.4–19.5%). Allowing diagonal contact changed the zero-correlation counts to 300 and 297, respectively. These results support a spatial effect on finite-grid crossing at comparable mean occupancy. Its magnitude depends on how connectivity is defined. Application to nickelate films requires a calibrated local proxy and independent transport and magnetic measurements.
+Can two fields with the same mean and similar fractions of favorable sites differ in their probability of containing a connected path? We studied this question on 64 × 64 lattices using two random-field spectra, four target nearest-neighbor correlations, and 300 independent realizations per condition. We classified sites through a symmetric window around a fixed proxy value and tested each resulting map for a left-to-right crossing. Mean active fractions ranged from 0.46035 to 0.46181 across conditions. With edge-sharing connectivity, neither spectral family produced a crossing at zero correlation. At a target correlation of 0.80, 61 of 300 Gaussian-spectrum maps crossed (20.3%, 95% Wilson interval 16.2–25.2%), as did 45 of 300 Lorentzian-squared-spectrum maps (15.0%, 11.4–19.5%). Allowing diagonal contact changed the zero-correlation counts to 300 and 297, respectively. These results support a spatial effect on finite-grid crossing at comparable mean occupancy. Its magnitude depends on how connectivity is defined. In a separate 7,200-pair test at target 0.80, crossings remained more frequent on the original maps after exact occupancy matching, but became less frequent as grids grew from 32 to 128 sites per side. Neither family met the proposed finite-size convergence criterion. Application to nickelate films requires a calibrated local proxy and independent transport and magnetic measurements.
 
 **Index terms** — Site percolation, spatial correlation, random fields, nickelate thin films.
 
@@ -27,6 +27,8 @@ The spectral generator applied the square root of the selected power spectrum to
 **Local activity.** At site i, the proxy was xᵢ = 0.50 + 0.13zᵢ, where zᵢ is the standardized field. A site was active when |xᵢ − 0.50| ≤ 0.08. For a unit-normal variable, the corresponding reference probability is erf[0.08/(√2 × 0.13)] = 0.461699. Each crop has the specified mean and dispersion, but the number of its values falling within the window can fluctuate. The design therefore controls the proxy moments exactly and compares active fractions empirically.
 
 **Outcome and uncertainty.** A realization counted as spanning if an active component touched both the left and right crop boundaries. Four-neighbor connectivity allowed shared edges. Eight-neighbor connectivity also allowed shared corners. We evaluated both rules on each mask and estimated crossing probability as the number of spanning masks divided by 300. Wilson 95% intervals describe Monte Carlo uncertainty for each condition. The unit of replication was the field. The source reports eight passed implementation checks, including comparison of breadth-first search with union-find on 20 seeded masks under both adjacency rules. These checks address algorithm behavior within the model.
+
+**Finite-size and exact-occupancy control.** We tested the highest correlation target (0.80) on 32, 64 and 128 sites per side, using two independent batches of 600 fields per spectrum and size. We retained the original proxy window, threefold padding and open crossing boundaries. For each standardized crop we uniformly permuted its binary labels and scored both the original and the shuffled mask under both adjacency rules. Every pair therefore has exactly the same active-site count. The count may vary between pairs. For the continuous standardized field we estimated covariance by averaging horizontal and vertical products over valid pairs at axial lags 1–8, 12 and 16. We evaluated the stated finite-size rule on pooled four-neighbor original-mask probabilities: absolute change below 0.02 at both doublings, and a Wilson 95% half-width of at most 0.03 at each size. This extension targets the partial-crossing regime identified by the initial study.
 
 ## III. Results and Analysis
 
@@ -51,23 +53,48 @@ Diagonal contact changed the zero-correlation result on the very same masks. It 
 
 **Earlier aggregate comparison.** A separate 64 × 64 study reported mean active fractions of 0.4613, 0.4622, and 0.4584 at correlation lengths of 1, 2, and 3 lattice units. Its reported crossing probabilities were 0.150, 0.980, and 0.988. These aggregate observations show the same broad direction, but a length in lattice units and a nearest-neighbor correlation specify different properties. Pooling the studies would require an explicit mapping between generators. The earlier 48 × 48 scan also omitted the mean-proxy column from its table header. **[DATA NEEDED]** The original generator, realization-level records, and verified row-to-mean mapping are required to reproduce and interpret that scan.
 
+**Table II. Finite-size control at target correlation 0.80.** Counts are out of 1,200 original–shuffle pairs per row. Intervals refer to original edge-sharing crossings.
+
+| Size | Spectrum | Edge | Shuffled edge | 95% interval |
+|---:|---|---:|---:|---|
+| 32 | Gaussian | 348 | 1 | 0.265–0.316 |
+| 32 | Lorentzian² | 279 | 1 | 0.209–0.257 |
+| 64 | Gaussian | 261 | 0 | 0.195–0.242 |
+| 64 | Lorentzian² | 186 | 0 | 0.136–0.177 |
+| 128 | Gaussian | 126 | 0 | 0.089–0.124 |
+| 128 | Lorentzian² | 56 | 0 | 0.036–0.060 |
+
+The Gaussian series did not meet the convergence rule. Its absolute changes were 0.072 and 0.113, with a maximum Wilson half-width of 0.026. The Lorentzian-squared series did not meet the convergence rule. Its absolute changes were 0.078 and 0.108, with a maximum Wilson half-width of 0.024.
+
+At size 64, mean axial covariance at lags 1, 2 and 4 was 0.799, 0.407, 0.024 for Gaussian fields and 0.798, 0.515, 0.185 for Lorentzian-squared fields. Agreement at the calibrated first lag coexists with measurable differences at longer lags. The supplement reports each batch, all measured lags, diagonal crossings and paired discordances.
+
+![Grid-size effects and axial covariance](finite_size_results/size_covariance.png)
+
+**Fig. 2.** Left, pooled original-map crossing probabilities at target correlation 0.80 with Wilson 95% intervals. Right, mean covariance of standardized fields on the 64-site grid. Lag zero equals one by construction.
+
 ## IV. Discussion and Limitations
 
-A narrow connection can decide whether a component reaches the far edge while changing the active fraction by only a few sites. The adjacency comparison demonstrates this directly: at zero target correlation, allowing movement across corners turned almost every mask into a crossing. Under edge-sharing connectivity, spatial correlation mattered most at the highest target tested. A claim about connectivity in an imaged film would therefore need a physical justification for which contacts can transmit current at the spatial resolution of the image.
+Changing the adjacency rule preserved every active site. It added links between corner-touching sites and raised the zero-correlation crossing counts from 0 to 300 and 297 in the two families. The exact-count shuffle further isolates spatial arrangement within each map. For a physical film, the relevant distance over which regions couple would have to be measured independently. Pixel size and corner contact alone do not determine current transmission.
 
-Several questions remain open even at the geometric level. Crop standardization alters the finite-sample marginal distribution, and mean occupancy can conceal variation among maps. An informative control would shuffle each binary mask while preserving its exact count of active sites, then measure the paired change in crossing probability. To establish size dependence, repeat the design over successive lattice-size doublings with independent seeds. The proposed convergence criterion is a change below 0.02 in crossing probability over each of two successive doublings, with a Wilson half-width no larger than 0.03. The present sensitivity study used one size. **[DATA NEEDED]** Exact-occupancy comparisons, empirical covariance curves, and replicated size-series results are needed to evaluate these extensions.
+The two size doublings provide a direct test of finite-grid stability at the most strongly correlated setting (Table II). Across the six size-by-family groups, only two of 7,200 shuffled controls had an edge-sharing crossing, both on the smallest grids. Original masks crossed more often at each tested size. The decline with size is evidence against treating the 64-site crossing probabilities as size-independent. The standardized finite-crop distribution and the axial covariance estimator also depend on crop size. The study does not establish the infinite-lattice limit or isotropy in measured films.
 
-**Material-level hypothesis.** Spatial variance and correlation of a calibrated local reduction-state proxy may improve prediction of joint transport and diamagnetic response across independently grown nickelate batches. A prospective study would compare a baseline model using mean reduction state, precursor composition, phase fraction, and strain with an otherwise identical model that adds prespecified spatial statistics. Entire growth batches should be held out together. Measurements from one film must stay in the same partition. Before collecting evaluation data, specify the proxy calibration, spatial resolution, transport and magnetic detection criteria, prediction metric, and minimum useful improvement. A gain that persists across held-out batches would support predictive value. Failure to reach the specified improvement with adequate precision would count against the hypothesis.
+**Material-level hypothesis.** Spatial variation in reduction state may improve prediction of joint transport and diamagnetic response across independent growth batches. Two published observations motivate this test. Spatially resolved electron energy-loss spectroscopy distinguished regions with incomplete reduction in nickelate films [6]. Scanning SQUID measurements mapped nonuniform diamagnetic response in superconducting nickelate films [7]. The reviewed records do not link a calibrated reduction map, transport curve and magnetic response to each film across independent batches. Combining observations from different studies would break that correspondence.
 
-**[DATA NEEDED]** No calibrated reduction maps, paired transport and magnetic observations, independent batch counts, or held-out prediction errors are supplied. The binary model includes neither local superconducting response nor coupling, current, or magnetic screening. Its crossing result cannot establish a superconducting pathway in a material.
+**Proposed validation protocol.** Within one composition and substrate platform, index every field of view, device and measurement by film and growth batch. Calibrate the reduction proxy against phase-identified reference regions, record its uncertainty and spatial resolution, and sample fields of view before examining outcomes. Estimate spatial variance and an axial correlation length on a common physical scale. Repeat maps to quantify measurement noise. Test whether transport along a defined direction agrees with paths identified on a registered map at that resolution.
+
+Before evaluation, use a separate pilot to freeze the transport noise floor, magnetic background threshold, and temperature tolerance for a joint transition. Fit a baseline predictor using mean proxy, precursor composition, phase fraction and strain. Add the two spatial statistics to an otherwise identical predictor. Hold whole batches out, with all tuning confined to training batches. Report the decrease in mean squared probability error (Brier score), weighting each batch equally. Compare a batch-bootstrap interval with a pilot-defined minimum useful improvement. A lower bound above that minimum supports useful predictive gain. An upper bound below it counts against that prediction. Overlap leaves the test inconclusive.
+
+**[DATA NEEDED]** Execution requires linked film-level records, enough independent growth batches to estimate uncertainty, and a locked evaluation set. The simulations provide no held-out film score or estimate of superconducting current.
 
 ## V. Conclusion
 
-At similar mean active fractions, increasing the target nearest-neighbor correlation from 0 to 0.80 raised edge-sharing crossing frequency from zero observed crossings to 61/300 and 45/300 in the two spectral families. Allowing corner contact made crossings common even at zero correlation. The calculations support the geometric hypothesis within the tested finite-grid model. A direct nickelate test would ask whether measured spatial structure improves prediction of both transport and magnetic response in independent growth batches.
+At similar mean active fractions, increasing the target nearest-neighbor correlation from 0 to 0.80 raised edge-sharing crossing frequency from zero observed crossings to 61/300 and 45/300 in the two spectral families. Allowing corner contact made crossings common even at zero correlation. The matched-count shuffle and size series quantify how strongly this result depends on spatial arrangement and grid extent at the highest target. A direct nickelate test would ask whether measured spatial structure improves prediction of both transport and magnetic response in independent growth batches.
 
 ## Data and Code Availability
 
 The archived implementation, configuration, replicate records and aggregate results used for Table I are available at commit 267535fd908d3e235b5c46d0fefe744221cf16e7. Repository: https://github.com/tejasvswipe/superconductvity-nickelate-research
+
+The finite-size supplement contains 7,200 paired records and separate batch summaries. Run finite_size_control.py from the repository with NumPy 2.3.5.
 
 ## References
 
@@ -81,3 +108,7 @@ The archived implementation, configuration, replicate records and aggregate resu
 
 [5] A. Gutiérrez-Llorente et al., “Toward reliable synthesis of superconducting infinite layer nickelate thin films by topochemical reduction,” Advanced Science, vol. 11, art. 2309092, 2024. DOI: 10.1002/advs.202309092.
 
+
+[6] “Doping evolution of the Mott–Hubbard landscape in infinite-layer nickelates.” https://pmc.ncbi.nlm.nih.gov/articles/PMC7812792/
+
+[7] “Scanning SQUID study of ferromagnetism and superconductivity in infinite-layer nickelates,” Physical Review Materials, vol. 8, art. 024802, 2024. DOI: 10.1103/PhysRevMaterials.8.024802.
