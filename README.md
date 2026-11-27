@@ -1,52 +1,31 @@
-# Nickelate research audit and reproducibility package
+# Spatial correlation and connectivity in a thresholded random field
 
-This package preserves the user-supplied materials and separates two models: (1) a correlated-field binary threshold-percolation calculation and (2) the uploaded one-orbital layered tight-binding notebook. The newly implemented spatial simulation is an explicitly defined sensitivity experiment. It is **not** a reproduction of the original percolation manuscript's numerical output because that implementation and its raw maps were not supplied.
+Tejasv Sahu and Aaradhya Gupta study how the arrangement of active sites changes the probability of a left-to-right crossing on a finite grid. A 2,400-field sensitivity study tests two spectra and two connectivity rules. A further 7,200 original–shuffle pairs test spatial arrangement at identical occupancy within each pair. Edge-sharing crossings became less frequent as the grid grew, and neither spectral family met the proposed convergence criterion.
 
-## Principal reports
+[Read the paper](revised_manuscript.md) · [Download the PDF](revised_manuscript.pdf) · [LaTeX source](revised_manuscript.tex)
 
-- `final_research_diagnosis.md`: scientific verdict and research recommendation.
-- `literature_review.md`: 18-source review and primary-source summaries.
-- `hypothesis_matrix.md`: ranked alternatives, predictions, and falsification tests.
-- `model_derivation.md`: standalone equations, assumptions, and validity boundaries.
-- `computational_experiment_report.md`: actual computational runs, uncertainty, and staged decisive experiment.
-- `revised_manuscript.md`: cautious manuscript draft based on executed results, not the missing original run.
+## Data behind the paper
 
-## Reproducing the executed work
+| Analysis | Implementation | Results |
+|---|---|---|
+| Fixed-window sensitivity | [Generator](spatial_covariance_sensitivity.py) and [configuration](spatial_config.json) | [Condition summaries](spatial_covariance_sensitivity.csv) and [individual maps](spatial_covariance_sensitivity_replicates.csv) |
+| Finite-size and shuffle controls | [Experiment](finite_size_control.py) | [Batch and pooled summaries](finite_size_results/summary.csv) and [paired outcomes](finite_size_results/maps.csv) |
+| Earlier correlation-length comparison | [Original archived manuscript and aggregate tables](spatial_percolation_manuscript_and_data.txt) | The original generator and individual maps were unavailable. |
 
-Use Python 3.12.3. The recorded runtime used NumPy 2.5.3, Matplotlib 3.11.2, and pandas 3.0.6. Only NumPy and Matplotlib are needed for the new spatial simulation and figure. The tight-binding notebook uses NumPy/Matplotlib; the uploaded display-only cell may require IPython. The independent tests use Python's standard `unittest` library.
+## Reproduce the computations
 
-From this directory:
+Run the following from the repository root in a Python environment. The finite-size experiment used NumPy 2.3.5. The archived sensitivity run records its environment in [run metadata](run_metadata.json). The simulation scripts write their result CSVs into the checkout.
 
-```bash
-python3 -m pip install -r requirements.txt
-cd original_reproduction && python3 notebook_cell_1.py && cd ..
-python3 audit_original.py
-python3 spatial_covariance_sensitivity.py
-python3 -m unittest -v test_spatial_percolation.py
-python3 plot_spatial_sensitivity.py
+```sh
+python -m pip install numpy==2.3.5 matplotlib
+python -m unittest -v test_spatial_percolation.py
+python spatial_covariance_sensitivity.py
+python plot_spatial_sensitivity.py
+python finite_size_control.py
 ```
 
-`spatial_covariance_sensitivity.py` reads `spatial_config.json`, uses recorded deterministic child seeds, and overwrites the aggregate and map-level CSV files. The figure is regenerated from the aggregate CSV. The suite of eight tests includes a separate union-find connectivity algorithm, but both use the same generated binary masks; it does not independently replicate the random-field generator.
+Compile the PDF with `tectonic revised_manuscript.tex` from the repository root so the two figure paths resolve.
 
-The notebook second cell is display-only. It can be run after the first cell has produced `original_reproduction/charge_reconstruction_profiles.png`, in a Jupyter environment with IPython available. This audit did not execute inside a Google Colab account.
+## Supporting material
 
-## Bundle contents
-
-- `nickelate_interface_model_colab.ipynb`: untouched uploaded notebook.
-- `spatial_percolation_manuscript_and_data.txt`: supplied manuscript/data paste, unchanged.
-- `research_instructions.txt`: supplied research instructions, unchanged.
-- `original_reproduction/`: extracted notebook code, fresh execution logs, CSV outputs, and figure.
-- `audit_original.py`, `audit_results.json`, `ensemble_sensitivity.py`, `ensemble_sensitivity.csv`: tight-binding consistency checks and ensemble comparison.
-- `spatial_config.json`, `spatial_covariance_sensitivity.py`: explicit configuration and separate new spectral-field sensitivity model.
-- `spatial_covariance_sensitivity.csv`: aggregate condition results and Wilson intervals.
-- `spatial_covariance_sensitivity_replicates.csv`: one row per simulated map, including seed, active fraction, empirical cropped correlation, and both connectivity outcomes.
-- `test_spatial_percolation.py`, `spatial_run.log`, `spatial_test_run.log`, `spatial_plot_run.log`: test code and actual calculation/test/plot execution logs; all eight spatial tests passed.
-- `plot_spatial_sensitivity.py`, `spatial_covariance_sensitivity.png`: reproducible plot and exported figure.
-- `run_metadata.json`: runtime versions, execution status, seeds, test counts, and audit limits.
-- `additional_literature_sources.json`, `literature_comparison.csv`: machine-readable literature data.
-
-## Interpretation and known limits
-
-The tight-binding notebook is a dimensionless, noninteracting one-orbital slab model. Its fixed-total-filling runs enforce a zero layer-summed density change; the comparison at fixed chemical potential does not. The model has no self-consistent electrostatics, so it cannot yield a nickelate screening length.
-
-The supplied percolation manuscript's headline values are manuscript-reported and their Wilson interval arithmetic is internally consistent. But the source implementation, exact covariance, raw map outcomes, and linked Google Doc protocol were not available, so those calculations and protocol details cannot be independently verified here. The new sensitivity run compares two declared spectral families matched by nearest-neighbour correlation and two explicit connectivity rules on 64 × 64 maps. It does not establish finite-size convergence, a physical reduction-state distribution, or superconducting transpor
+The [model derivation](model_derivation.md), [literature review](literature_review.md), and [separate tight-binding notebook](nickelate_interface_model_colab.ipynb) provide project background. The paper evaluates geometric crossing in simulated fields. Its proposed experiment on nickelate films requires linked measurements from independently grown batches.

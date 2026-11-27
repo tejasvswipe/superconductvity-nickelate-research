@@ -1,20 +1,16 @@
 # Spatial Correlation and Connectivity Rules Govern Spanning in a Thresholded Random Field
 
-## About the authors
-
-Tejasv Sahu and Aaradhaya Gupta are independent student researchers in India. Their paper asks a question about the geometry of thin films: if two maps have the same number of favorable sites, how much does their arrangement matter? To study that question, the authors compare simulated maps with shuffled copies and count how often neighboring sites form a path across the grid.
-
-### Tejasv Sahu
-
+**Tejasv Sahu**  
+High school researcher, India  
 [ORCID 0009-0008-4301-3633](https://orcid.org/0009-0008-4301-3633)
 
-### Aaradhaya Gupta
-
+**Aaradhya Gupta**  
+High school researcher, India  
 [ORCID 0009-0001-1160-6687](https://orcid.org/0009-0001-1160-6687)
 
 ## Abstract
 
-Can two fields with the same mean and similar fractions of favorable sites differ in their probability of containing a connected path? We studied this question on 64 × 64 lattices using two random-field spectra, four target nearest-neighbor correlations, and 300 independent realizations per condition. We classified sites through a symmetric window around a fixed proxy value and tested each resulting map for a left-to-right crossing. Mean active fractions ranged from 0.46035 to 0.46181 across conditions. With edge-sharing connectivity, neither spectral family produced a crossing at zero correlation. At a target correlation of 0.80, 61 of 300 Gaussian-spectrum maps crossed (20.3%, 95% Wilson interval 16.2–25.2%), as did 45 of 300 Lorentzian-squared-spectrum maps (15.0%, 11.4–19.5%). Allowing diagonal contact changed the zero-correlation counts to 300 and 297, respectively. These results support a spatial effect on finite-grid crossing at comparable mean occupancy. Its magnitude depends on how connectivity is defined. In a separate 7,200-pair test at target 0.80, crossings remained more frequent on the original maps after exact occupancy matching, but became less frequent as grids grew from 32 to 128 sites per side. Neither family met the proposed finite-size convergence criterion. Application to nickelate films requires a calibrated local proxy and independent transport and magnetic measurements.
+Can two fields with the same mean and similar fractions of favorable sites differ in their probability of containing a connected path? We studied this question on $64\times 64$ lattices using two random-field spectra, four target nearest-neighbor correlations, and 300 independent realizations per condition. We classified sites through a symmetric window around a fixed proxy value and tested each resulting map for a left-to-right crossing. Mean active fractions ranged from 0.46035 to 0.46181 across conditions. With edge-sharing connectivity, neither spectral family produced a crossing at zero correlation. At a target correlation of 0.80, 61 of 300 Gaussian-spectrum maps crossed (20.3%, 95% Wilson interval 16.2–25.2%), as did 45 of 300 Lorentzian-squared-spectrum maps (15.0%, 11.4–19.5%). Allowing diagonal contact changed the zero-correlation counts to 300 and 297, respectively. These results support a spatial effect on finite-grid crossing at comparable mean occupancy. Its magnitude depends on how connectivity is defined. In a separate 7,200-pair test at target 0.80, crossings remained more frequent on the original maps after exact occupancy matching, but became less frequent as grids grew from 32 to 128 sites per side. Neither family met the proposed finite-size convergence criterion. Application to nickelate films requires a calibrated local proxy and independent transport and magnetic measurements.
 
 **Index terms** — Site percolation, spatial correlation, random fields, nickelate thin films.
 
@@ -28,15 +24,41 @@ The computational hypothesis is directional. At fixed proxy mean, dispersion, an
 
 ## II. R&D Methodology
 
-**Field generation.** We considered two non-negative power spectra, Gaussian and Lorentzian squared. Writing q for the spatial wavevector and ℓ for the spectral scale, the spectra are exp(−ℓ²|q|²/2) and (1 + ℓ²|q|²)⁻², respectively. Within each family, bisection selected ℓ to give a target nearest-neighbor correlation of 0, 0.35, 0.60, or 0.80 on the full periodic grid. Matching this statistic leaves the covariance at larger separations free to differ.
+**Field generation.** We used the Gaussian and Lorentzian-squared power spectra
 
-The spectral generator applied the square root of the selected power spectrum to Gaussian noise and inverse transformed the result on a 192 × 192 grid. We retained the central 64 × 64 crop, then recentered and rescaled it to zero mean and unit variance. Cropping separates the measured edges from the periodic boundary of the generating grid. The design comprised 2,400 fields in eight conditions, with seed streams derived from NumPy SeedSequence(53821) [[8]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.py).
+$$
+S_{\mathrm G}(\mathbf q)=\exp\!\left(-\frac{\ell^2\lVert\mathbf q\rVert^2}{2}\right),\qquad
+S_{\mathrm L}(\mathbf q)=\left(1+\ell^2\lVert\mathbf q\rVert^2\right)^{-2}.
+$$
 
-**Local activity.** At site i, the proxy was xᵢ = 0.50 + 0.13zᵢ, where zᵢ is the standardized field. A site was active when |xᵢ − 0.50| ≤ 0.08. For a unit-normal variable, the corresponding reference probability is erf[0.08/(√2 × 0.13)] = 0.461699. Each crop has the specified mean and dispersion, but the number of its values falling within the window can fluctuate. The design therefore controls the proxy moments exactly and compares active fractions empirically.
+Here $\mathbf q$ is the spatial wavevector and $\ell$ is the spectral scale. Within each family, bisection selected $\ell$ to match the nearest-neighbor correlation $\rho_1\in\{0,0.35,0.60,0.80\}$ on the full periodic grid. Matching this statistic leaves the covariance at larger separations free to differ.
 
-**Outcome and uncertainty.** A realization counted as spanning if an active component touched both the left and right crop boundaries. Four-neighbor connectivity allowed shared edges. Eight-neighbor connectivity also allowed shared corners. We evaluated both rules on each mask and estimated crossing probability as the number of spanning masks divided by 300. Wilson 95% intervals describe Monte Carlo uncertainty for each condition. The unit of replication was the field. The source reports eight passed implementation checks, including comparison of breadth-first search with union-find on 20 seeded masks under both adjacency rules. These checks address algorithm behavior within the model.
+The spectral generator applied the square root of the selected power spectrum to Gaussian noise and inverse transformed the result on a $192\times 192$ grid. We retained the central $64\times 64$ crop, then recentered and rescaled it to zero mean and unit variance. Cropping separates the measured edges from the periodic boundary of the generating grid. The design comprised 2,400 fields in eight conditions, with seed streams derived from NumPy SeedSequence(53821) [[8]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.py).
 
-**Finite-size and exact-occupancy control.** We tested the highest correlation target (0.80) on 32, 64 and 128 sites per side, using two independent batches of 600 fields per spectrum and size. We retained the original proxy window, threefold padding and open crossing boundaries. For each standardized crop we uniformly permuted its binary labels and scored both the original and the shuffled mask under both adjacency rules. Every pair therefore has exactly the same active-site count. The count may vary between pairs. For the continuous standardized field we estimated covariance by averaging horizontal and vertical products over valid pairs at axial lags 1–8, 12 and 16. We evaluated the stated finite-size rule on pooled four-neighbor original-mask probabilities: absolute change below 0.02 at both doublings, and a Wilson 95% half-width of at most 0.03 at each size. This extension targets the partial-crossing regime identified by the initial study [[12]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_control.py).
+**Local activity.** Let $z_i$ denote the standardized field at site $i$. The proxy $x_i$ and binary activity indicator $A_i$ were
+
+$$
+x_i=\mu+\sigma z_i,\qquad A_i=\mathbf{1}\!\left\{\lvert x_i-x^\ast\rvert\leq w\right\},
+$$
+
+with $\mu=x^\ast=0.50$, $\sigma=0.13$, and $w=0.08$. For a standard-normal variable $Z$, the reference active fraction is
+
+$$
+p_{\mathrm{ref}}=\Pr\!\left(\lvert Z\rvert\leq\frac{w}{\sigma}\right)
+=\operatorname{erf}\!\left(\frac{w}{\sqrt{2}\,\sigma}\right)\approx 0.461699.
+$$
+
+Each crop has the specified mean and dispersion, but the number of its values falling within the window can fluctuate. The design therefore controls the proxy moments exactly and compares active fractions empirically.
+
+**Outcome and uncertainty.** A realization counted as spanning if an active component touched both the left and right crop boundaries. Four-neighbor connectivity allowed shared edges. Eight-neighbor connectivity also allowed shared corners. For each adjacency rule $a\in\{4,8\}$, let $Y_{r,a}=1$ when mask $r$ spans and $Y_{r,a}=0$ otherwise. For $R$ masks, the estimated crossing probability is
+
+$$
+\widehat p_a=\frac{1}{R}\sum_{r=1}^{R}Y_{r,a},\qquad R=300\ \text{per initial condition}.
+$$
+
+Wilson 95% intervals describe Monte Carlo uncertainty for each condition. The unit of replication was the field. The source reports eight passed implementation checks, including comparison of breadth-first search with union-find on 20 seeded masks under both adjacency rules. These checks address algorithm behavior within the model.
+
+**Finite-size and exact-occupancy control.** We tested the highest correlation target (0.80) on 32, 64 and 128 sites per side, using two independent batches of 600 fields per spectrum and size. We retained the original proxy window, threefold padding and open crossing boundaries. For each standardized crop we uniformly permuted its binary labels and scored both the original and the shuffled mask under both adjacency rules. Every pair therefore has exactly the same active-site count. The count may vary between pairs. For the continuous standardized field we estimated covariance by averaging horizontal and vertical products over valid pairs at axial lags 1–8, 12 and 16. We evaluated the stated finite-size rule on pooled four-neighbor original-mask probabilities: $\lvert\widehat p_4(2N)-\widehat p_4(N)\rvert<0.02$ at both doublings, and a Wilson 95% half-width $h_N\leq0.03$ at each size. This extension targets the partial-crossing regime identified by the initial study [[12]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_control.py).
 
 ## III. Results and Analysis
 
@@ -57,9 +79,9 @@ Diagonal contact changed the zero-correlation result on the very same masks. It 
 
 ![Spanning probability under four- and eight-neighbor connectivity](spatial_covariance_sensitivity.png)
 
-**Fig. 1.** Left-to-right crossing probability on 64 × 64 maps. Bars give Wilson 95% intervals for 300 independent fields per point [[9]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.csv).
+**Fig. 1.** Left-to-right crossing probability on $64\times 64$ maps. Bars give Wilson 95% intervals for 300 independent fields per point [[9]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.csv).
 
-**Earlier aggregate comparison.** A separate 64 × 64 study reported mean active fractions of 0.4613, 0.4622, and 0.4584 at correlation lengths of 1, 2, and 3 lattice units. Its reported crossing probabilities were 0.150, 0.980, and 0.988 [[11]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_percolation_manuscript_and_data.txt). These aggregate observations show the same broad direction, but a length in lattice units and a nearest-neighbor correlation specify different properties. Pooling the studies would require an explicit mapping between generators. For the earlier 48 × 48 scan, the archived table omits the mean proxy for each row, and the original generator and individual map records were unavailable. The aggregate results therefore leave open how crossing probability varied with the mean proxy at a given correlation length.
+**Earlier aggregate comparison.** A separate $64\times 64$ study reported mean active fractions of 0.4613, 0.4622, and 0.4584 at correlation lengths of 1, 2, and 3 lattice units. Its reported crossing probabilities were 0.150, 0.980, and 0.988 [[11]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_percolation_manuscript_and_data.txt). These aggregate observations show the same broad direction, but a length in lattice units and a nearest-neighbor correlation specify different properties. Pooling the studies would require an explicit mapping between generators. For the earlier $48\times 48$ scan, the archived table omits the mean proxy for each row, and the original generator and individual map records were unavailable. The aggregate results therefore leave open how crossing probability varied with the mean proxy at a given correlation length.
 
 **Table II. Finite-size control at target correlation 0.80.** Counts are out of 1,200 original–shuffle pairs per row. Intervals refer to original edge-sharing crossings [[13]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_results/summary.csv).
 
@@ -100,7 +122,7 @@ At similar mean active fractions, increasing the target nearest-neighbor correla
 
 ## Data and Code Availability
 
-The archive provides the field generator [[8]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.py), condition-level estimates [[9]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.csv) and individual map outcomes [[10]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity_replicates.csv) used for Table I.
+The current manuscript is maintained on the [main branch](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/main/revised_manuscript.md). The archive provides the field generator [[8]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.py), condition-level estimates [[9]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity.csv) and individual map outcomes [[10]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/267535fd908d3e235b5c46d0fefe744221cf16e7/spatial_covariance_sensitivity_replicates.csv) used for Table I.
 
 The finite-size supplement includes the simulation script [[12]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_control.py), batch summaries [[13]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_results/summary.csv) and 7,200 paired records [[14]](https://github.com/tejasvswipe/superconductvity-nickelate-research/blob/17a8b7f801d3c105c6ebfdf49bf1fe5b6fae62b0/finite_size_results/maps.csv). The reported run used NumPy 2.3.5.
 
@@ -117,7 +139,7 @@ The finite-size supplement includes the simulation script [[12]](https://github.
 [[5]](https://doi.org/10.1002/advs.202309092) A. Gutiérrez-Llorente et al., “Toward reliable synthesis of superconducting infinite layer nickelate thin films by topochemical reduction,” Advanced Science, vol. 11, art. 2309092, 2024. DOI: 10.1002/advs.202309092.
 
 
-[[6]](https://pmc.ncbi.nlm.nih.gov/articles/PMC7812792/) “Doping evolution of the Mott–Hubbard landscape in infinite-layer nickelates.” https://pmc.ncbi.nlm.nih.gov/articles/PMC7812792/
+[[6]](https://pmc.ncbi.nlm.nih.gov/articles/PMC7812792/) “Doping evolution of the Mott–Hubbard landscape in infinite-layer nickelates.” PMCID: PMC7812792.
 
 [[7]](https://doi.org/10.1103/PhysRevMaterials.8.024802) “Scanning SQUID study of ferromagnetism and superconductivity in infinite-layer nickelates,” Physical Review Materials, vol. 8, art. 024802, 2024. DOI: 10.1103/PhysRevMaterials.8.024802.
 

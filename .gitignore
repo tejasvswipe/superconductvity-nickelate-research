@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+revised_manuscript.aux
+revised_manuscript.log
+revised_manuscript.out
